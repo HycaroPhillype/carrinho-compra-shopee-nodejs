@@ -17,7 +17,12 @@ async function deleteItem(userCart, name) {
   }
 }
 
-async function removeItem(userCart, index) {}
+async function removeItem(userCart, index) {
+  const deleteIndex = index - 1;
+  if (index >= 0 && index < userCart.length) {
+    userCart.splice(deleteIndex, 1);
+  }
+}
 
 async function displayCart(userCart) {
   console.log("\nShopee cart list: \n");
