@@ -24,6 +24,28 @@ async function removeItem(userCart, index) {
   }
 }
 
+async function removeItemFromTheList(userCart, item) {
+  const indexFound = userCart.findIndex(
+    (product) => product.name === item.name,
+  );
+  console.log(`index: ${indexFound}`);
+
+  if (indexFound === -1) {
+    console.log("Item não encontrado");
+    return;
+  }
+
+  if (userCart[indexFound].quantity > 1) {
+    userCart[indexFound].quantity -= 1;
+    return;
+  }
+
+  if (userCart[indexFound].quantity === 1) {
+    userCart.splice(indexFound, 1);
+    return;
+  }
+}
+
 async function displayCart(userCart) {
   console.log("\nShopee cart list: \n");
   userCart.forEach((item, index) => {
@@ -33,4 +55,11 @@ async function displayCart(userCart) {
   });
 }
 
-export { addItem, sumTotal, deleteItem, removeItem, displayCart };
+export {
+  addItem,
+  sumTotal,
+  deleteItem,
+  removeItem,
+  displayCart,
+  removeItemFromTheList,
+};

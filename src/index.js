@@ -12,9 +12,10 @@ const item2 = await createItem("hotweels lamborghini", 39.99, 3);
 
 await cartService.addItem(myCart, item1);
 await cartService.addItem(myCart, item2);
-await cartService.displayCart(myCart);
+await cartService.removeItemFromTheList(myCart, item2);
+await cartService.removeItemFromTheList(myCart, item2);
 
-console.log("\nShopee Cart TOTAL is: \n");
+await cartService.displayCart(myCart);
 
 // await cartService.deleteItem(myCart, item2.name);
 // await cartService.deleteItem(myCart, item1.name);
