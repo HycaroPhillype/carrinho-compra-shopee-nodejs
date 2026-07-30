@@ -23,6 +23,7 @@ while (running) {
       const productSelect = products[indice];
 
       await cartService.addItem(myCart, productSelect);
+      console.log(products);
 
       console.log("\nProduto adicionado ao carrinho.\n");
       break;

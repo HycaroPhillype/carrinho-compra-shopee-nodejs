@@ -1,5 +1,11 @@
 async function addItem(userCart, item) {
-  userCart.push(item);
+  const indexFound = userCart.findIndex((product) => product.name == item.name);
+  if (indexFound === -1) {
+    userCart.push(item);
+    return;
+  }
+
+  userCart[indexFound].quantity++;
 }
 
 async function sumTotal(userCart) {
