@@ -47,12 +47,17 @@ async function removeItemFromTheList(userCart, item) {
 }
 
 async function displayCart(userCart) {
-  console.log("\nShopee cart list: \n");
+  console.log("\nMy cart list Shopee: \n");
+  console.log("------------------------------------------");
+  console.log("");
+
   userCart.forEach((item, index) => {
     console.log(
       `${index + 1}. ${item.name} - R$ ${item.price} | ${item.quantity}x | Subtotal = ${item.subtotal()}\n`,
     );
   });
+  console.log("");
+  console.log("------------------------------------------");
 }
 
 export {
