@@ -1,11 +1,27 @@
+import createItem from "./item.js";
+
 async function addItem(userCart, item) {
-  const indexFound = userCart.findIndex((product) => product.name == item.name);
-  if (indexFound === -1) {
-    userCart.push(item);
+  if (!item) {
+    console.log("Produto inválido.");
     return;
   }
 
-  userCart[indexFound].quantity++;
+  if (item.quantity === 0) {
+    console.log("Produto indisponível.");
+    return;
+  }
+
+  const indexFound = userCart.findIndex((product) => product.name == item.name);
+
+  if (indexFound === -1) {
+    const newItem = await createItem(item.name, item.price, 1);
+
+    userCart.push(newItem);
+  } else {
+    userCart[indexFound].quantity++;
+  }
+
+  item.quantity--;
 }
 
 async function sumTotal(userCart) {

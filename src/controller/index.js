@@ -8,6 +8,13 @@ const myWhishList = [];
 
 const prompt = PromptSync();
 
+const item1 = await createItem("hotwhells ferrari", 20.99, 5);
+const item2 = await createItem("hotweels lamborghini", 39.99, 3);
+const item3 = await createItem("camaro amarelo", 18.99, 6);
+const item4 = await createItem("Ford Mustang Boss-429 ", 109.99, 3);
+
+const productsStock = [item1, item2, item3, item4];
+
 let running = true;
 
 while (running) {
@@ -17,16 +24,16 @@ while (running) {
 
   switch (option) {
     case 1:
-      await displayProducts(products);
+      await displayProducts(productsStock);
       const productOption = prompt("\nDigite o número do produto: ");
       const indice = Number(productOption) - 1;
-      const productSelect = products[indice];
+      const productSelect = productsStock[indice];
 
-      await cartService.addItem(myCart, productSelect);
-      console.log(products);
-
-      console.log("\nProduto adicionado ao carrinho.\n");
-      break;
+      const added = await cartService.addItem(myCart, productSelect);
+      // console.log(products);
+      if (added) {
+        console.log("Produto adicionado ao carrinho.");
+      }
     case 2:
       if (!myCart.length) {
         console.log("Seu carrinho está vazio.");
@@ -45,13 +52,6 @@ while (running) {
       break;
   }
 }
-
-const item1 = await createItem("hotwhells ferrari", 20.99, 5);
-const item2 = await createItem("hotweels lamborghini", 39.99, 3);
-const item3 = await createItem("camaro amarelo", 18.99, 6);
-const item4 = await createItem("Ford Mustang Boss-429 ", 109.99, 3);
-
-const products = [item1, item2, item3, item4];
 
 displayProducts(myCart);
 

@@ -1,5 +1,3 @@
-import PromptSync from "prompt-sync";
-
 async function displayProducts(products) {
   console.log("\nWelcome to the your Shopee Cart!\n");
 
@@ -16,8 +14,6 @@ async function displayProducts(products) {
 }
 
 async function displayMenu() {
-  const prompt = PromptSync();
-
   console.log("======================");
   console.log("SHOPE MENU");
   console.log("======================");
