@@ -9,7 +9,9 @@ async function displayProducts(products) {
   console.log("------------------------------------------");
 
   for (let i = 0; i < products.length; i++) {
-    console.log(`${i + 1}) ${products[i].name}: R$ ${products[i].price} `);
+    console.log(
+      `${i + 1}) ${products[i].name}: R$ ${products[i].price} - Quantidade: ${products[i].quantity}`,
+    );
   }
 }
 
@@ -18,7 +20,12 @@ async function displayMenu() {
   console.log("SHOPE MENU");
   console.log("======================");
 
-  const menu = ["Ver produtos", "Ver carrinho", "Sair"];
+  const menu = [
+    "Ver produtos",
+    "Ver carrinho",
+    "Remover item do carrinho",
+    "Sair",
+  ];
 
   for (let i = 0; i < menu.length; i++) {
     console.log(`${i + 1} - ${menu[i]} `);

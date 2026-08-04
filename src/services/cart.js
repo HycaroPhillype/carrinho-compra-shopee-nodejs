@@ -2,12 +2,12 @@ import createItem from "./item.js";
 
 async function addItem(userCart, item) {
   if (!item) {
-    console.log("Produto inválido.");
+    console.log("\nProduto inválido.");
     return;
   }
 
   if (item.quantity === 0) {
-    console.log("Produto indisponível.");
+    console.log("\nProduto indisponível.");
     return;
   }
 
@@ -22,6 +22,8 @@ async function addItem(userCart, item) {
   }
 
   item.quantity--;
+
+  return true;
 }
 
 async function sumTotal(userCart) {
@@ -46,24 +48,30 @@ async function removeItem(userCart, index) {
   }
 }
 
-async function removeItemFromTheList(userCart, item) {
-  const indexFound = userCart.findIndex(
+async function removeItemFromTheList(userCart, productStock, item) {
+  const cartIndex = userCart.findIndex((product) => product.name === item.name);
+
+  if (cartIndex === -1) {
+    console.log("intem não encontrado no carrinho");
+    return;
+  }
+
+  const stockIndex = productStock.findIndex(
     (product) => product.name === item.name,
   );
-  console.log(`index: ${indexFound}`);
 
-  if (indexFound === -1) {
-    console.log("Item não encontrado");
+  if (userCart[cartIndex].quantity > 1) {
+    userCart[cartIndex].quantity -= 1;
+
+    productStock[stockIndex].quantity += 1;
     return;
   }
 
-  if (userCart[indexFound].quantity > 1) {
-    userCart[indexFound].quantity -= 1;
-    return;
-  }
+  if (userCart[cartIndex].quantity === 1) {
+    userCart.splice(cartIndex, 1);
 
-  if (userCart[indexFound].quantity === 1) {
-    userCart.splice(indexFound, 1);
+    productStock[stockIndex].quantity += 1;
+
     return;
   }
 }

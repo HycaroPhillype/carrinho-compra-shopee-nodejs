@@ -11,7 +11,7 @@ const prompt = PromptSync();
 const item1 = await createItem("hotwhells ferrari", 20.99, 5);
 const item2 = await createItem("hotweels lamborghini", 39.99, 3);
 const item3 = await createItem("camaro amarelo", 18.99, 6);
-const item4 = await createItem("Ford Mustang Boss-429 ", 109.99, 3);
+const item4 = await createItem("Ford Mustang Boss-429", 109.99, 3);
 
 const productsStock = [item1, item2, item3, item4];
 
@@ -20,8 +20,9 @@ let running = true;
 while (running) {
   await displayMenu();
 
-  const option = Number(prompt("\nEscolha uma das opções: \n"));
+  const option = prompt("Escolha uma das opções: \n").trim();
 
+  const optionSelected = Number(option);
   switch (option) {
     case 1:
       await displayProducts(productsStock);
@@ -34,6 +35,7 @@ while (running) {
       if (added) {
         console.log("Produto adicionado ao carrinho.");
       }
+      break;
     case 2:
       if (!myCart.length) {
         console.log("Seu carrinho está vazio.");
@@ -43,6 +45,31 @@ while (running) {
       await cartService.sumTotal(myCart);
       break;
     case 3:
+      if (!myCart.length) {
+        console.log("Seu carrinho está vazio.");
+        break;
+      }
+      await cartService.displayCart(myCart);
+      const removeOption = Number(
+        prompt("\nDigite o número do produto que deseja remover: "),
+      );
+
+      const removeIndex = removeOption - 1;
+      const itemToRemove = myCart[removeIndex];
+
+      if (!itemToRemove) {
+        console.log("Produto inválido.");
+        break;
+      }
+
+      await cartService.removeItemFromTheList(
+        myCart,
+        productsStock,
+        itemToRemove,
+      );
+      console.log("Produto removido do carrinho.");
+      break;
+    case 4:
       running = false;
       break;
 
@@ -55,13 +82,6 @@ while (running) {
 
 displayProducts(myCart);
 
-// await cartService.addItem(myCart, item2);
-// await cartService.removeItemFromTheList(myCart, item2);
-// await cartService.removeItemFromTheList(myCart, item2);
-
 await cartService.displayCart(myCart);
-
-// await cartService.deleteItem(myCart, item2.name);
-// await cartService.deleteItem(myCart, item1.name);
 
 export { myCart };
