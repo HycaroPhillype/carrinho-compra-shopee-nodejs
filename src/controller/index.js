@@ -32,6 +32,11 @@ while (running) {
       const indice = Number(productOption) - 1;
       const productSelect = productsStock[indice];
 
+      if (!productSelect) {
+        console.log("Produto inválido.");
+        break;
+      }
+
       const added = await cartService.addItem(myCart, productSelect);
       // console.log(products);
       if (added) {
