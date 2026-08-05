@@ -20,7 +20,9 @@ let running = true;
 while (running) {
   await displayMenu();
 
-  const option = prompt("Escolha uma das opções: \n").trim();
+  const option = Number(prompt("Escolha uma das opções: \n").trim());
+  console.log(option);
+  console.log(typeof option);
 
   const optionSelected = Number(option);
   switch (option) {
